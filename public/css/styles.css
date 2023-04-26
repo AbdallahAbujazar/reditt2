@@ -346,9 +346,9 @@ header small {
 @media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive a.icon {
-    position: absolute;
-    right: 0;
-    top: 0;
+    position: fixed;
+    right: 20px;
+    top: 20px;
   }
   .topnav.responsive a {
     float: none;

@@ -1,0 +1,8 @@
+<div class="popular-posts">
+    <ul>
+      <% popularPosts.forEach(post => { %>
+        <li><a href="/post/<%= post.id %>"><%= post.title %> <strong> | <%= post.comment_count %> comments</strong></a></li>
+      <% }); %>
+    </ul>
+  </div>
+  

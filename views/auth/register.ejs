@@ -1,0 +1,112 @@
+<%- include('../partials/header', {title: 'Register'}) %>
+<main>
+<div class="container">
+  <div class="row justify-content-center mt-5" >
+    <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+      <ul>
+        <% for (let i = 0; i < errors.length; i++) { %>
+          <li><%= errors[i] %></li>
+        <% } %>
+      </ul>
+    <% } %>
+    
+    <div class="col-md-6" style="width: 100%;">
+      <h2 class="text-center mb-4">Register</h2>
+      <form method="POST" action="/register" id="register-form" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">ُEnter your name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+          <span id="nameError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">ُEnter your email</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
+          <span id="emailError" class="error"></span>
+
+        </div>
+        <div class="form-group">
+          <label for="profile_image">Choose your profile image</label>
+          <input type="file" class="form-control-file" id="profile_image" name="profile_image">
+          <span id="profile_imageError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          <span id="passwordError" class="error"></span>
+
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm Password</label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+          <span id="confirmPasswordError" class="error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<footer>
+  <p>Footer content goes here.</p>
+</footer>
+</body>
+</html>
+<script>
+    const form = document.querySelector('#register-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  const nameInput = document.querySelector('#name');
+  const emailInput = document.querySelector('#email');
+  const passwordInput = document.querySelector('#password');
+  const confirmPasswordInput = document.querySelector('#confirm_password');
+  const profile_imageInput = document.querySelector('#profile_image');
+  
+  let nameError = '';
+  let emailError = '';
+  let passwordError = '';
+  let confirmPasswordError = '';  
+  let profile_imageError = '';
+  
+  if (nameInput.value.trim() === '') {
+    nameError = '* Name is required';
+  }
+  
+  if (emailInput.value.trim() === '') {
+    emailError = '* Email is required';
+  } else if (!isValidEmail(emailInput.value.trim())) {
+    emailError = '* Invalid email format';
+  }
+  
+  if (profile_imageInput.value.trim() === '') {
+    profile_imageError = '* profile image is required';
+  }
+
+  if (passwordInput.value.trim() === '') {
+    passwordError = '* Password is required';
+  } else if (passwordInput.value.trim().length < 8) {
+    passwordError = '* Password must be at least 8 characters long';
+  }
+  
+  if (confirmPasswordInput.value.trim() === '') {
+    confirmPasswordError = '* Confirm Password is required';
+  } else if (confirmPasswordInput.value.trim() !== passwordInput.value.trim()) {
+    confirmPasswordError = '* Passwords do not match';
+  }
+  
+  document.querySelector('#nameError').textContent = nameError;
+  document.querySelector('#emailError').textContent = emailError;
+  document.querySelector('#passwordError').textContent = passwordError;
+  document.querySelector('#confirmPasswordError').textContent = confirmPasswordError;
+  document.querySelector('#profile_imageError').textContent = profile_imageError;
+  
+  if (nameError === '' && emailError === '' && passwordError === '' && confirmPasswordError === '') {
+    form.submit();
+  }
+});
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+</script>

@@ -1,0 +1,199 @@
+<%- include('partials/header', {title: 'Home Page'}) %>
+
+<% if (user) { %>
+  <input type="hidden" value="<%= user.name %>" id="userName">
+  <input type="hidden" value="<%= user.id %>" id="userId">
+  <input type="hidden" value="<%= user.profile_image %>" id="profile_image">
+
+<% } else { %>
+<% } %>
+
+<div class="row">
+  <%- include('partials/leftside') %>
+
+  <div class="leftcolumn">
+<main>
+
+
+  <% if (typeof msg !== 'undefined') { %>
+
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+      <strong>Danger!</strong> <%= msg %>.
+    </div>
+
+  <% } %>
+
+
+
+
+
+  <div class="posts-header">
+    <h1>All Posts</h1>
+    <input type="text" onclick="showModal()">
+    <button id="show-add-post-modal-btn">Add Post</button>
+  </div>
+
+  <div id="posts-container">
+    <% if (posts && posts.length > 0) { %>
+      <% posts.forEach(function(post) { %>
+        <div class="post">
+          <div class="post-votes">
+            <button class="upvote-btn <%= post.userVote === 'up' ? 'voted' : '' %>" data-postid="<%= post.post_id %>" data-uservote="<%= post.userVote %>">
+              <i class="fa-solid fa-arrow-up "></i>
+            </button>
+            <span class="vote-count" id="vote-count-<%= post.post_id %>">
+              <%= post.up_votes_count - post.down_votes_count %>
+            </span>
+            <button class="downvote-btn  <%= post.userVote === 'down' ? 'voted' : '' %>" data-postid="<%= post.post_id %>" data-uservote="<%= post.userVote %>">
+              <i class="fa-solid fa-arrow-down" data-postid="<%= post.post_id %>"></i>
+            </button>
+            
+            <% if (user && post.user_id == user.id) { %>
+              <button>
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button>
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            <% } %>
+          </div>
+          <div class="post-content">
+            <div class="chip">
+              <img src="img/userimages/<%= post.profile_image %>" alt="Person" width="96" height="96">
+              <a href="profile/<%= post.user_id %>" class="comment-author"><%= post.name %></a>
+            </div>
+            <h2>
+              <a href="/post/<%= post.post_id %>">
+                <%= post.title %>
+              </a>
+            </h2>
+            <img src="/img/posts_images/<%= post.post_image %>" alt="<%= post.title %>" class="post_image">
+
+            <p style="-webkit-line-clamp:3; display: -webkit-box; -webkit-line-clamp: 0;-webkit-box-orient: vertical;">
+              <%= post.body %>
+            </p>
+           
+
+            
+
+            <div class="comment-thread">
+              <style>
+
+              </style>
+              <% if (post.comments && post.comments.length > 0) { %>
+                <h4>Comments</h4>
+              <!-- Comment 1 start -->
+              <% post.comments.forEach(function(comment) { %>
+                
+              <div class="comment" id="comment-<%= comment.comment_id %>">
+                <div class="comment-heading" >
+                    <div class="comment-info">
+                      <div class="chip">
+                        <img src="img/userimages/<%= comment.profile_image %>" alt="Person" width="96" height="96">
+                      
+                        <a href="profile/<%= comment.user_id %>" class="comment-author"><%= comment.name %></a>
+                        <% 
+
+                        const date1 = new Date(comment.created_at);
+                        const date2 = new Date();
+                        let created_time = "";
+                        const diffMs = date2 - date1; // Difference in milliseconds
+
+                        const diffSec = Math.floor(diffMs / 1000); // Difference in seconds
+                        const diffMin = Math.floor(diffMs / (1000 * 60)); // Difference in minutes
+                        const diffHrs = Math.floor(diffMs / (1000 * 60 * 60)); // Difference in hours
+                        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24)); // Difference in days
+
+                        if (diffDays > 0) {
+                          created_time = diffDays + " days";
+                        } else if (diffHrs > 0) {
+                          created_time = diffHrs + " hours";
+                        } else if (diffMin > 0) {
+                          created_time = diffMin + " minutes";
+                        } else {
+                          created_time = diffSec + " seconds";
+                        }
+
+
+
+
+                        %>
+                        <%= created_time %>
+                       
+                      </div>
+                    </div>
+                    <% if (user && user.id == comment.user_id) { %>
+                    <i class="fa-solid fa-trash-can deletComment" data-commentid="<%= comment.comment_id %>"></i>
+                    <% } %>
+                </div>
+          
+                <div class="comment-body">
+                    <p>
+                      <%= comment.body %>                    
+                    </p>
+                </div>
+          
+            </div>
+            <% }) %>
+            <% } %>
+          </div>
+
+          
+          </div>
+          <% if (user) { %>
+          <input type="text" placeholder="Add comment .." class="addcomment" data-postid="<%= post.post_id %>" data-isuser='<%=user.name%>' data-userid='<%=user.id%>' data-profileimage='<%=user.profile_image%>'>        
+          <% } else { %>
+            <input type="text" placeholder="Add comment .." class="addcomment" data-postid="<%= post.post_id %>">        
+
+            <% } %>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No posts found.</p>
+    <% } %>
+  </div>
+
+  <% if (user) { %>
+    <p>Welcome, <%= user.name %>!</p>
+  <% } else { %>
+    <p>Welcome!</p>
+  <% } %>
+
+  <!-- modal for adding a post -->
+  <div id="add-post-modal">
+    <div class="modal-content">
+      <button id="close-modal-btn" onclick="closeModal()">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </button>
+
+
+      <%- include('partials/addpost') %>
+
+
+    </div>
+  </div>
+</main>
+
+</div>
+<div class="rightcolumn">
+  <div class="card">
+    <% if (user) { %>
+    <h2><%= user.name %></h2>
+    <div class="fakeimg"><img src="/img/userimages/<%= user.profile_image %>" alt=""></div>
+    <button onclick="window.location.href = '/logout'">Logout</button>
+    <% }else { %>
+      <button onclick="window.location.href = '/login'">Login</button>
+      <% }%>
+  </div>
+  <div class="card">
+    <h3>Popular Post</h3>
+    <%- include('partials/popular-posts') %>
+  </div>
+
+</div>
+</div>
+
+
+
+<%- include('partials/footer') %>

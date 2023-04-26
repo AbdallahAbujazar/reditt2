@@ -1,0 +1,314 @@
+<footer>
+    <p>Footer content goes here.</p>
+  </footer>
+  <script>
+    
+    const addCommentInputs = document.querySelectorAll('.addcomment');
+
+addCommentInputs.forEach(addCommentInput => {
+  
+
+
+  addCommentInput.addEventListener('keydown', async (event) => {
+
+    if (event.key === 'Enter') {
+      const commentInput = event.target;
+      const commentBody = commentInput.value.trim();
+      const post_id = commentInput.dataset.postid;
+        const userName = commentInput.dataset.isuser;
+        const userId = commentInput.dataset.userid;
+        const profile_image = commentInput.dataset.profileimage;
+
+      if (commentBody) {
+
+
+        // create a new DOM element for the comment
+        const newCommentElement = document.createElement("div");
+        newCommentElement.classList.add("comment");
+
+        
+        const comment = { body: commentBody, user_id: userId, post_id: post_id };
+
+
+
+
+       // if (response.ok) {
+     if(userName != null){
+
+      const response = await fetch('/comments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(comment)
+        });
+        const data = await response.json();
+        const responsecommentId = data.commentId; 
+
+        newCommentElement.innerHTML = `
+  <div class="comment-heading" >
+    <div class="comment-info">
+      <div class="chip">
+                        <img src="/img/userimages/${profile_image}" alt="Person" width="96" height="96">
+                      
+                        <a href="/profile/${userId}" class="comment-author">${userName}</a>
+                        
+                            1 Second
+                       
+                      </div>
+    </div>
+    <i class="fa-solid fa-trash-can deletComment" data-commentid="${responsecommentId}"></i>
+  </div>
+  <div class="comment-body">
+    <p>${commentBody}</p>
+  </div>
+`;
+
+       }else{
+        newCommentElement.innerHTML = `
+      <div>
+        <span>Please 
+                        <a href="/login" class="comment-author">login </a>
+                         or 
+                         <a href="/register" class="comment-author">register </a>
+                         to be able comment</span>  
+                        </div> 
+
+        <form action="/login" method="POST" id="add-post-form">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="Enter your E-mail">
+          <span id="emailError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+          <span id="passwordError" class="error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+  
+`;
+      }
+      
+
+
+
+
+        // append the new comment element to the comment thread
+        const commentThread = commentInput.parentElement.querySelector('.comment-thread');
+        
+        commentThread.appendChild(newCommentElement);
+        commentInput.value = "";
+
+
+
+        registerDeleteIcons()
+
+     // } 
+    }
+    }
+  });
+});
+
+function registerDeleteIcons() {
+  const trashIcons = document.querySelectorAll('.deletComment');
+
+trashIcons.forEach(trashIcon => {
+  trashIcon.addEventListener('click', async (event) => {
+    const commentDiv = event.target.closest('.comment');
+const commentId2 = commentDiv.id.split('-')[1];
+
+const commentIcont = event.target;
+     const commentId = commentIcont.dataset.commentid;
+
+
+try {
+  // Make an AJAX request to delete the comment from the database
+  await fetch(`/comments/${commentId}`, { method: 'DELETE' });
+  
+  // Remove the comment element from the page
+  commentDiv.remove();
+} catch (error) {
+  // Handle any other errors
+  console.error(error);
+}
+
+  });
+});
+
+}
+registerDeleteIcons()
+
+
+
+
+
+const upvoteBtns = document.querySelectorAll('.upvote-btn');
+const downvoteBtns = document.querySelectorAll('.downvote-btn');
+
+upvoteBtns.forEach((upvoteBtn, index) => {
+
+  const userVote = upvoteBtn.dataset.uservote;
+
+  if (userVote === 'up') {
+    upvoteBtn.classList.remove = "voted";
+    upvoteBtn.disabled = true;
+
+  } else if (userVote === 'down') {
+    downvoteBtns[index].classList.add = "voted";
+    downvoteBtns[index].disabled = true;
+  }
+// Add event listener for upvote button click
+upvoteBtn.addEventListener('click', async (event) => {
+  const postId = event.currentTarget.getAttribute('data-postid');
+  const response = await fetch(`/posts/${postId}/upvote`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ postId })
+
+   });
+  if (response.ok) {
+
+    if (userVote === 'down') {
+      downvoteBtns[index].disabled = false;
+    }
+    const voteCountEl = document.querySelector(`#vote-count-${postId}`);
+    const voteCount = parseInt(voteCountEl.innerText);
+    if(voteCount == -1){
+      voteCount+= 1;
+    }
+    voteCountEl.innerText = voteCount + 1;
+    userVote = 'up';
+    upvoteBtn.disabled = true;
+  } else {
+    // handle error
+  }});
+});
+
+downvoteBtns.forEach((downvoteBtn, index) => {
+
+  const userVote = downvoteBtn.dataset.uservote;
+
+  if (userVote === 'down') {
+    downvoteBtn.classList.remove = "voted";
+
+    downvoteBtn.disabled = true;
+  } else if (userVote === 'up') {
+    upvoteBtns[index].disabled = true;
+  }
+// Add event listener for downvote button click
+downvoteBtn.addEventListener('click', async (event) => {
+  const postId = event.currentTarget.getAttribute('data-postid');
+  const response = await fetch(`/posts/${postId}/downvote`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ postId })
+  });
+
+  if (response.ok) {
+        if (userVote === 'up') {
+      upvoteBtns[index].disabled = false;
+    }
+
+    const voteCountElement = document.querySelector(`#vote-count-${postId}`);
+    const voteCount = parseInt(voteCountElement.textContent);
+    if(voteCount == 1){
+      voteCount-= 1;
+    }
+    voteCountElement.textContent = voteCount - 1;
+
+    // Update userVote and disable downvote button
+    userVote = 'down';
+    downvoteBtn.disabled = true;
+  }});
+});
+
+	// add post functionality
+// we will wrap these event listeners in if statements because the elements won't be present on the post detail page and if we don't check for them the app would crash
+const showAddPostModal = document.getElementById("show-add-post-modal-btn");
+const addPostModal = document.getElementById("add-post-modal");
+const closeAddPostModal = document.getElementById("close-modal-btn");
+const addPostForm  = document.getElementById("add-post-form");
+const postsContainer  = document.getElementById("posts-container");
+
+if (showAddPostModal) {
+  showAddPostModal.addEventListener("click", showModal);
+
+  // close the add post modal if the user clicks outside of it
+  window.addEventListener("click", (event) => {
+    if (event.target === addPostModal) {
+      closeModal();
+    }
+  });
+}
+
+if (closeAddPostModal) {
+  closeAddPostModal.addEventListener("click", closeModal);
+}
+
+function showModal() {
+  addPostModal.style.display = "flex";
+  // prevent the posts page from scrolling when scrolling inside the posts modal
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  addPostModal.style.display = "none";
+  document.body.style.overflow = "";
+}
+
+// now lets add the functionality to add and save a post to localStorage
+if (addPostForm) {
+  addPostForm.addEventListener("submit");
+}
+// client.js
+
+
+addPostForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const title = document.querySelector('#title').value;
+  const body = document.querySelector('#body').value;
+  try {
+    const response = await fetch('/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ title, body })
+    });
+    if (response.ok) {
+      const post = await response.json();
+      console.log('New post:', post);
+      addPostForm.reset();
+      addPostForm.style.display = 'none';
+
+    } else {
+      const error = await response.json();
+      console.error(error.message);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  closeModal()
+});
+
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+
+  </script>
+</body>
+</html>

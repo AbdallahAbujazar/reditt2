@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+<main>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4" style="width: 100%;">
+      <h1>Login</h1>
+      <%  if (message) { %>
+        <div class="w3-panel w3-pink">
+          <h3>Error!</h3>
+          <p><%= message %>.</p>
+        </div>
+
+      <% } %>
+      <form action="/login" method="POST" id="add-post-form">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="Enter your E-mail">
+          <span id="emailError" class="error"></span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+          <span id="passwordError" class="error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+</main>
+<script>
+  const form = document.querySelector('#add-post-form');
+form.addEventListener('submit', function(event) {
+event.preventDefault();
+const emailInput = document.querySelector('#email');
+const passwordInput = document.querySelector('#password');
+
+let emailError = '';
+let passwordError = '';
+
+
+if (emailInput.value.trim() === '') {
+  emailError = '* Email is required';
+} else if (!isValidEmail(emailInput.value.trim())) {
+  emailError = '* Invalid email format';
+}
+
+
+if (passwordInput.value.trim() === '') {
+  passwordError = '* Password is required';
+} else if (passwordInput.value.trim().length < 8) {
+  passwordError = '* Password must be at least 8 characters long';
+}
+
+
+document.querySelector('#emailError').textContent = emailError;
+document.querySelector('#passwordError').textContent = passwordError;
+
+if ( emailError === '' && passwordError === '') {
+  form.submit();
+}
+});
+
+function isValidEmail(email) {
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+return emailRegex.test(email);
+}
+
+</script>
+<%- include('../partials/footer') %>

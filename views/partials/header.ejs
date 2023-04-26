@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+
+      <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <script src="https://kit.fontawesome.com/29b6a640bb.js" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    </head>
+
+  <body>
+    <header>
+
+
+      <div class="topnav" id="myTopnav">
+
+       
+
+        <div>
+          <strong>Reddit</strong>
+
+            <a href="/" id="home-link" class="active">Home</a>
+            <% if ( user2  && user2 !== null) { %>
+
+            <a href="/profile" id="profile-link">Profile</a>
+            <a href="/logout" id="logout-link">Logout</a>
+            <% } else { %>
+
+            <a href="/login" id="login-link">Login</a>
+            <a href="/register" id="register-link">Register</a>
+            <% } %>
+
+            <a href="#contact" id="contact-link">Contact</a>
+            <a href="#about" id="about-link">About</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"></i>
+            </a>
+      </div>
+<script>
+        // get the current URL endpoint
+        const endpoint = window.location.pathname;
+    
+    // remove the active class from all links
+    const links = document.querySelectorAll('.topnav a');
+    links.forEach(link => {
+      link.classList.remove('active');
+    });
+  
+    // add the active class to the link with the matching endpoint
+    if (endpoint === '/') {
+      document.getElementById('home-link').classList.add('active');
+    } else if (endpoint === '/profile') {
+      document.getElementById('profile-link').classList.add('active');
+    } else if (endpoint === '/logout') {
+      document.getElementById('logout-link').classList.add('active');
+    } else if (endpoint === '/login') {
+      document.getElementById('login-link').classList.add('active');
+    } else if (endpoint === '/register') {
+      document.getElementById('register-link').classList.add('active');
+    }
+</script>
+
+      </div>
+
+    </header>
+
+    

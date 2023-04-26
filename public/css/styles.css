@@ -1,0 +1,724 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+:root {
+  --main-color: orangered;
+  --main-color-hover: rgb(217, 58, 0);
+  --positive-color: green;
+  --negative-color: red;
+  --border-color: #ccc;
+  --light-grey: #f9f9f9;
+  --dark-grey: #ddd;
+  --font-large: 24px;
+  --font-reg: 16px;
+  --font-small: 12px;
+}
+
+body {
+  font-size: var(--font-reg);
+  background-color: #DAE0E6;
+
+  min-height: calc(100vh - 48px);
+  line-height: 1.4;
+  font-family: Noto Sans,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.card .chip{
+  margin-bottom: 15px;
+
+}
+.card .chip a{
+  outline-width: 0;
+  text-decoration: none;
+}
+.card .chip strong{
+color: green;
+}
+.topUsers{
+  min-width: 250px;
+  background-color: var(--light-grey);
+}
+main {
+  max-width: 760px;
+  width: 70%;
+  margin: 24px auto;
+  padding:  16px;
+}
+main input{
+  background-color: #f6f7f8;
+  border-radius: 4px;
+  border: 1px solid #edeff1;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #1c1c1c;
+  display: block;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  height: 38px;
+  margin: 3px 8px 3px 8px ;
+  outline: none;
+  padding: 0 16px;
+}
+
+
+.addcomment{
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 40px;
+  display: flex;
+}
+main a{
+  text-decoration: none;
+  color: #1c1c1c;
+}
+
+button {
+  background-color: rgb(20,132,214);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 0;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: var(--font-small);
+  cursor: pointer;
+  transition: background-color 300ms ease-in-out;
+}
+footer{
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ccc;
+}
+.error{
+  color: red;
+}
+button:hover {
+  background-color: var(--main-color-hover);
+}
+
+.lo
+a {
+  color: var(--main-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 300ms ease-in-out;
+}
+
+a:hover {
+  color: var(--main-color);
+}
+
+textarea {
+  background-color: #f6f7f8;
+  border-radius: 4px;
+  border: 1px solid #edeff1;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #1c1c1c;
+  display: block;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  height: 38px;
+  margin-right: 8px;
+  outline: none;
+  padding: 0 16px;}
+
+  .container{
+    padding: 25px;
+    background-color: #fff;
+  }
+  .post .post-votes button:hover{
+    background-color: #ccc;
+  }
+
+header {
+  background-color: #fff;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1;
+  position: sticky;
+  top: 0;
+}
+
+header small {
+  font-size: var(--font-small);
+  font-style: italic;
+}
+
+.posts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  margin-bottom: 15px;
+
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    display: -ms-flexbox;
+    margin-bottom: 16px;
+    padding: 8px;
+
+}
+
+.posts-header h1 {
+  font-size: var(--font-reg);
+  text-transform: uppercase;
+}
+
+.no-posts {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+}
+
+#posts-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.post {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  position: relative;
+}
+
+.post .post-votes {
+  background-color: var(--light-grey);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding-top: 5px;
+}
+
+.post .post-votes button {
+  background-color: transparent;
+  color: #000;
+  padding: 8px;
+  font-size: var(--font-reg);
+}
+
+.post .post-votes span {
+  font-size: var(--font-small);
+  font-weight: 600;
+}
+
+.post .post-votes span.positive {
+  color: var(--positive-color);
+}
+
+.post .post-votes span.negative {
+  color: var(--negative-color);
+}
+.post .post-content {
+  flex: 1;
+  padding: 8px 16px 25px 15px;
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+.leftcolumn {   
+  width: 100%;
+  min-width: 750px;
+}
+.first-leftcolumn{
+  width: 25%;
+}
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+.row{
+  display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.card button{
+  margin: 20px 0 0 0;
+  width: 100%;
+}
+.rightcolumn {
+
+  width: 30%;
+  padding-left: 20px;
+}
+
+.fakeimg {
+  width: 100%;
+}
+.fakeimg img{
+  height: 150px;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+   border-top-right-radius: 20px;
+   border-top-left-radius: 20px;
+   min-width: 270px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.rightcolumn ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding: 5px;
+  margin: 10px 0 10px 0;
+}
+.rightcolumn ul li{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  background-color: aliceblue;
+}
+.rightcolumn  li a{
+  text-decoration: none;
+    color: #1c1c1c;
+}
+.rightcolumn  li a:hover{
+    color: orangered;
+}
+@media screen and (max-width: 870px) {  
+
+   .rightcolumn, .first-leftcolumn, .leftcolumn{
+    width: 100%;
+    padding: 0;
+  }
+ 
+  .row{
+    flex-flow: column-reverse;
+  }
+ 
+}
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens (display the links vertically instead of horizontally) */
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+@media screen and (max-width: 900px) {  
+  .rightcolumn, .first-leftcolumn, .leftcolumn{
+    width: 100%;
+    padding: 0;
+  }
+
+  main{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+   .rightcolumn, .first-leftcolumn, .leftcolumn{
+    width: 100%;
+    padding: 0;
+  }
+
+  .row{
+    flex-flow: column-reverse;
+  }
+  main{
+    width: 100%;
+  }
+}
+
+.post .post-content h2 {
+  font-size: var(--font-large);
+  margin: 0;
+  padding-bottom:20px;
+}
+
+.post .post-content p {
+  margin: 0;
+  overflow: hidden;
+}
+
+#post-detail .post {
+  flex-direction: column-reverse;
+  padding: 16px;
+}
+
+#post-detail .post .post-votes {
+  position: relative;
+  flex-direction: row;
+  width: max-content;
+  border-radius: 8px;
+}
+
+#post-detail .post .post-content {
+  margin: 0;
+  padding: 0;
+}
+
+#post-detail .post .post-content p {
+  margin: 8px 0 16px;
+  white-space: pre-wrap;
+  display: block;
+}
+
+#add-comment-form,
+.reply-form {
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#add-comment-form textarea,
+.reply-form textarea {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+}
+
+#add-comment-form button,
+.reply-form button {
+  margin-top: 8px;
+}
+
+#comments-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.comment .comment-author {
+  font-weight: 600;
+  margin: 0;
+}
+
+.comment .comment-content {
+  font-size: var(--font-small);
+  margin: 8px 0;
+}
+
+.comment .comment-reply {
+  padding: 4px 8px;
+  background-color: var(--light-grey);
+  color: #000;
+  text-transform: lowercase;
+  font-style: italic;
+}
+
+.comment .comment-reply:hover {
+  background-color: var(--dark-grey);
+}
+
+#add-post-modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 16px;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.comment-thread {
+  max-width: 100%;
+  margin: 50px auto auto auto;
+  padding: 0 30px 0 5px;
+  background-color: #fff;
+}
+.m-0 {
+  margin: 0;
+}
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+
+.comment-body{
+  background-color: var(--light-grey);
+  padding: 15px;
+  border-radius: 30px;
+  border-top-left-radius: 0;
+
+}
+
+.comment-heading {
+
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 14px;
+}
+.comment{
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 15px;
+  border: 1px solid #e8e7e7;
+  border-radius: 30px;
+  border-top-left-radius: 0;
+}
+.comment-info {
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: 10px;
+}
+.comment-author {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: bold;
+  text-decoration: none;
+}
+.comment-author:hover {
+  text-decoration: underline;
+}
+.replies {
+  margin-left: 20px;
+}
+.post-votes button.voted {
+  background-color: rgb(215, 236, 251);
+  color:rgb(9, 66, 107);
+}
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+}
+
+.fa-trash-can:hover {
+color: red;
+cursor: pointer;
+}
+.chip img {
+  float: left;
+  margin: 0 10px 0 -25px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.modal-content #close-modal-btn {
+  background-color: transparent;
+  padding: 4px;
+  color: #000;
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border-radius: 50%;
+}
+.post_image{
+  max-width: 200px;
+  margin: 20px;
+  align-self: center;
+  border-radius: 10px;
+}
+.modal-content #close-modal-btn:hover {
+  background-color: var(--light-grey);
+}
+
+#register-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#register-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+#register-form .form-group:last-of-type {
+  flex: 1;
+}
+
+#register-form .form-group label {
+  font-size: var(--font-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+}
+
+#register-form .form-group input,
+#register-form .form-group textarea {
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+}
+
+#register-form .form-group textarea {
+  height: 100%;
+}
+#register-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#add-post-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+#add-post-form .form-group:last-of-type {
+  flex: 1;
+}
+
+#add-post-form .form-group label {
+  font-size: var(--font-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 4px;
+}
+
+#add-post-form .form-group input,
+#add-post-form .form-group textarea {
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+}
+
+#add-post-form .form-group textarea {
+  height: 100%;
+}
+
+@media screen and (min-width: 700px) {
+  .modal-content {
+    width: 80%;
+    height: auto;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+  }
+  .leftcolumn, .rightcolumn, .first-leftcolumn{
+    width: 100%;
+
+  }
+  main{
+    width: 100%;
+    
+  }
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #323131;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 15px;
+}
+
+.topnav a:hover {
+  background-color: orangered;
+  color: rgb(255, 255, 255);
+}
+
+.topnav a.active {
+  background-color: orangered;
+  color: rgb(255, 255, 255);
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}

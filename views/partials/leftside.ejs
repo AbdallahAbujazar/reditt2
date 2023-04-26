@@ -1,0 +1,27 @@
+<div class="first-leftcolumn">
+    <div class="card">
+
+      <% if (topUsers && topUsers.length > 0) { %>
+        <h2>Top Users</h2>
+        
+          <% topUsers.forEach(function(user) { %>
+           
+              
+              <div class="chip">
+                <div class="topUsers">
+                <img src="/img/userimages/<%= user.profile_image %>" alt="Person" width="96" height="96">
+                <a href="/profile/<%= user.id %>">
+                  <%= user.name %><strong> ( <%= user.post_count %> posts)</strong>
+                </a>
+              </div>
+              </div>  
+             
+              
+           
+          <% }) %>
+       
+      <% } %>
+  
+    
+    </div>
+  </div>

@@ -142,10 +142,10 @@
           
           </div>
           <% if (user) { %>
-
+<div class="comment-form">
           <input type="text" placeholder="Add comment .." class="addcomment" data-postid="<%= post.post_id %>" data-isuser='<%=user.name%>' data-userid='<%=user.id%>' data-profileimage='<%=user.profile_image%>'>        
           <button class="btn sendcomment"><i class="fa fa-paper-plane"></i></button>
-
+          </div>
 <% } else { %>
             <input type="text" placeholder="Add comment .." class="addcomment" data-postid="<%= post.post_id %>">        
 <button class="btn sendcomment"><i class="fa fa-paper-plane"></i></button>

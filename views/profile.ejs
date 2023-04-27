@@ -162,6 +162,9 @@
 
       <button onclick="window.location.href = '/logout'">Logout</button>
       <% }else { %>
+
+<h2><%= user.name %></h2>
+      <div class="fakeimg"><img src="/img/userimages/<%= user.profile_image %>" alt=""></div>
         <button onclick="window.location.href = '/login'">Login</button>
    <button onclick="window.location.href = '/register'">Register</button>
         <% }%>

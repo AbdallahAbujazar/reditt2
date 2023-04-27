@@ -77,7 +77,7 @@ main input{
   display: flex;
   align-items: center;
   position: absolute;
-  right: 6px;
+  right: 10px;
   bottom: 6px;
 }
 

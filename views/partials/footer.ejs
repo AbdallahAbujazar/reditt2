@@ -7,7 +7,7 @@
 
 addCommentInputs.forEach(addCommentInput => {
   
-  const sendButton = addCommentInput.parentElement.querySelector('.sendcomment');
+  const sendButton = addCommentInput.nextElementSibling;
   const commentInput = addCommentInput;
 
   const postComment = async () => {

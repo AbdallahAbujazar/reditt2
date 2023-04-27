@@ -152,8 +152,14 @@
   <div class="rightcolumn">
     <div class="card">
 <% if (user2) { %>
+<% if (user) { %>
       <h2><%= user.name %></h2>
       <div class="fakeimg"><img src="/img/userimages/<%= user.profile_image %>" alt=""></div>
+      <% }else { %>
+      <div class="fakeimg"><img src="/img/userimages/<%= user2.profile_image %>" alt=""></div>
+      <h2><%= user2.name %></h2>
+        <% }%>
+
       <button onclick="window.location.href = '/logout'">Logout</button>
       <% }else { %>
         <button onclick="window.location.href = '/login'">Login</button>

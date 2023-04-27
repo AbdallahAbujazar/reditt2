@@ -64,8 +64,8 @@ main input{
   display: flex;
   align-items: center;
   position: absolute;
-  right: 0;
-  bottom: 35;
+  right: 35px;
+  bottom: 0;
   left: 40px;
   padding: 20px;
 }
@@ -79,7 +79,6 @@ main input{
   position: absolute;
   right: 0;
   bottom: 0;
-  left: 80px;
 }
 
 

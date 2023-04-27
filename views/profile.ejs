@@ -151,13 +151,17 @@
   </div>
   <div class="rightcolumn">
     <div class="card">
+<% if (user) { %>
       <h2><%= user.name %></h2>
       <div class="fakeimg"><img src="/img/userimages/<%= user.profile_image %>" alt=""></div>
+      <button onclick="window.location.href = '/logout'">Logout</button>
+      <% }else { %>
+        <button onclick="window.location.href = '/login'">Login</button>
+   <button onclick="window.location.href = '/register'">Register</button>
+        <% }%>
 
     </div>
     <div class="card">
-     <button onclick="window.location.href = '/login'">Login</button>
-   <button onclick="window.location.href = '/register'">Register</button>
       <h3>Popular Post</h3>
       <%- include('partials/popular-posts') %>
     </div>

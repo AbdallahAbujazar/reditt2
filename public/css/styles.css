@@ -60,7 +60,7 @@ main input{
 }
 
 
-.comment-input {
+.addcomment {
   display: flex;
   align-items: center;
   position: absolute;
@@ -70,13 +70,13 @@ main input{
   padding: 20px;
 }
 
-.comment-input .sendcomment {
+ .sendcomment {
   margin-right: 10px;
+  height: 30px;  
+  width: 30px;  
 }
 
-.comment-input .addcomment {
-  flex: 1;
-}
+
 
 
 

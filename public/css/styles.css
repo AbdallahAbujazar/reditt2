@@ -60,31 +60,27 @@ main input{
 }
 
 
-.comment-form {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  
+.addcomment {
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 35;
+  left: 40px;
+  padding: 20px;
 }
 
-.addcomment {
-  flex: 1;
-  margin-right: 10px;
-  height: 30px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
+ .sendcomment {
+
+  height: 30px;  
+  width: 30px;  
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 80px;
 }
-
-.sendcomment {
-  height: 30px;
-  width: 30px;
-}
-
-
 
 
 

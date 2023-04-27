@@ -28,7 +28,7 @@ https://hej-6abv.onrender.com/
 * Express.js
 * PostgreSQL
 * EJS
-* Bootstrap
+* Multer
 * Bcrypt
 * JWT
 

@@ -168,8 +168,8 @@ upvoteBtn.addEventListener('click', async (event) => {
     }
     voteCountEl.innerText = voteCount + 1;
     userVote = 'up';
-upvoteBtn.classList.add = "downvote-btn";
-upvoteBtn.classList.remove = "upvote-btn";
+    upvoteBtn.disabled = true;
+
 
   } else {
     // handle error

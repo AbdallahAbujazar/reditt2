@@ -72,12 +72,12 @@ main input{
 
  .sendcomment {
 
-  height: 30px;  
-  width: 30px;  
+  height: 35px;  
+  width: 35px;  
   display: flex;
   align-items: center;
   position: absolute;
-  right: 0;
+  right: 40px;
   bottom: 0;
 }
 

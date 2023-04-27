@@ -143,7 +143,8 @@
           </div>
           <% if (user) { %>
           <input type="text" placeholder="Add comment .." class="addcomment" data-postid="<%= post.post_id %>" data-isuser='<%=user.name%>' data-userid='<%=user.id%>' data-profileimage='<%=user.profile_image%>'>        
-          <% } else { %>
+          <button class="btn sendcomment"><i class="fa fa-paper-plane"></i></button>
+<% } else { %>
             <input type="text" placeholder="Add comment .." class="addcomment" data-postid="<%= post.post_id %>">        
 <button class="btn sendcomment"><i class="fa fa-paper-plane"></i></button>
 

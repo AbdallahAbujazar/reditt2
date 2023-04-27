@@ -60,14 +60,26 @@ main input{
 }
 
 
-.addcomment{
-  padding: 20px;
+.comment-input {
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 0;
   bottom: 0;
   left: 40px;
-  display: flex;
+  padding: 20px;
 }
+
+.comment-input .sendcomment {
+  margin-right: 10px;
+}
+
+.comment-input .addcomment {
+  flex: 1;
+}
+
+
+
 main a{
   text-decoration: none;
   color: #1c1c1c;

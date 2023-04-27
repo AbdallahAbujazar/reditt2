@@ -7,35 +7,24 @@
 
 addCommentInputs.forEach(addCommentInput => {
   
+  const sendButton = addCommentInput.parentElement.querySelector('.sendcomment');
+  const commentInput = addCommentInput;
 
+  const postComment = async () => {
+    const commentBody = commentInput.value.trim();
+    const post_id = commentInput.dataset.postid;
+    const userName = commentInput.dataset.isuser;
+    const userId = commentInput.dataset.userid;
+    const profile_image = commentInput.dataset.profileimage;
 
-  addCommentInput.addEventListener('keydown', async (event) => {
+    if (commentBody) {
+      const newCommentElement = document.createElement("div");
+      newCommentElement.classList.add("comment");
 
-    if (event.key === 'Enter') {
-      const commentInput = event.target;
-      const commentBody = commentInput.value.trim();
-      const post_id = commentInput.dataset.postid;
-        const userName = commentInput.dataset.isuser;
-        const userId = commentInput.dataset.userid;
-        const profile_image = commentInput.dataset.profileimage;
+      const comment = { body: commentBody, user_id: userId, post_id: post_id };
 
-      if (commentBody) {
-
-
-        // create a new DOM element for the comment
-        const newCommentElement = document.createElement("div");
-        newCommentElement.classList.add("comment");
-
-        
-        const comment = { body: commentBody, user_id: userId, post_id: post_id };
-
-
-
-
-       // if (response.ok) {
-     if(userName != null){
-
-      const response = await fetch('/comments', {
+      if (userName != null) {
+        const response = await fetch('/comments', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -46,70 +35,67 @@ addCommentInputs.forEach(addCommentInput => {
         const responsecommentId = data.commentId; 
 
         newCommentElement.innerHTML = `
-  <div class="comment-heading" >
-    <div class="comment-info">
-      <div class="chip">
-                        <img src="/img/userimages/${profile_image}" alt="Person" width="96" height="96">
-                      
-                        <a href="/profile/${userId}" class="comment-author">${userName}</a>
-                        
-                            1 Second
-                       
-                      </div>
-    </div>
-    <i class="fa-solid fa-trash-can deletComment" data-commentid="${responsecommentId}"></i>
-  </div>
-  <div class="comment-body">
-    <p>${commentBody}</p>
-  </div>
-`;
-
-       }else{
+          <div class="comment-heading" >
+            <div class="comment-info">
+              <div class="chip">
+                <img src="/img/userimages/${profile_image}" alt="Person" width="96" height="96">
+                <a href="/profile/${userId}" class="comment-author">${userName}</a>
+                1 Second
+              </div>
+            </div>
+            <i class="fa-solid fa-trash-can deletComment" data-commentid="${responsecommentId}"></i>
+          </div>
+          <div class="comment-body">
+            <p>${commentBody}</p>
+          </div>
+        `;
+      } else {
         newCommentElement.innerHTML = `
-      <div>
-        <span>Please 
-                        <a href="/login" class="comment-author">login </a>
-                         or 
-                         <a href="/register" class="comment-author">register </a>
-                         to be able comment</span>  
-                        </div> 
-
-        <form action="/login" method="POST" id="add-post-form">
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="text" class="form-control" id="email" name="email" placeholder="Enter your E-mail">
-          <span id="emailError" class="error"></span>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
-          <span id="passwordError" class="error"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
-  
-`;
+          <div>
+            <span>Please 
+              <a href="/login" class="comment-author">login </a>
+              or 
+              <a href="/register" class="comment-author">register </a>
+              to be able comment
+            </span>  
+          </div> 
+          <form action="/login" method="POST" id="add-post-form">
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your E-mail">
+              <span id="emailError" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+              <span id="passwordError" class="error"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        `;
       }
-      
 
+      const commentThread = addCommentInput.parentElement.querySelector('.comment-thread');
+      commentThread.appendChild(newCommentElement);
+      commentInput.value = "";
 
-
-
-        // append the new comment element to the comment thread
-        const commentThread = commentInput.parentElement.querySelector('.comment-thread');
-        
-        commentThread.appendChild(newCommentElement);
-        commentInput.value = "";
-
-
-
-        registerDeleteIcons()
-
-     // } 
+      registerDeleteIcons();
     }
+  };
+
+  addCommentInput.addEventListener('keydown', event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      postComment();
     }
   });
+
+  sendButton.addEventListener('click', event => {
+    event.preventDefault();
+    postComment();
+  });
 });
+
 
 function registerDeleteIcons() {
   const trashIcons = document.querySelectorAll('.deletComment');
